@@ -1,5 +1,7 @@
 import { observable } from "aurelia";
 
+const SUT = "__GRID_ENGINE__";
+
 export class DevtoolsPanel {
   public msg;
   public characters: string[] = [];
@@ -8,12 +10,12 @@ export class DevtoolsPanel {
 
   async attaching() {
     this.msg = this.isGridEngineAvailable() ? "Grid Engine connected" : "No Grid Engine found";
-    this.characters = await evaluate<string[]>("window.gridEngine.getAllCharacters()");
+    this.characters = await evaluate<string[]>(`window.${SUT}.getAllCharacters()`);
   }
 
   public async moveTo() {
     const [x, y] = this.moveToInput.split(",");
-    await evaluate(`window.gridEngine.moveTo("${this.selectedCharacter}", { x: ${x}, y: ${y}})`);
+    await evaluate(`window.${SUT}.moveTo("${this.selectedCharacter}", { x: ${x}, y: ${y}})`);
   }
 
   private async selectedCharacterChanged() {
@@ -22,11 +24,11 @@ export class DevtoolsPanel {
   }
 
   private async isGridEngineAvailable() {
-    return await evaluate("!!window.gridEngine");
+    return await evaluate(`!!window.${SUT}`);
   }
 
   private async getCharacterPos(char) {
-    return await evaluate<Position>(`window.gridEngine.getPosition("${char}")`);
+    return await evaluate<Position>(`window.${SUT}.getPosition("${char}")`);
   }
 }
 

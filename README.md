@@ -1,37 +1,12 @@
-# grid-engine-devtools
+# Grid Engine DevTools
 
-This project is bootstrapped by [aurelia/new](https://github.com/aurelia/new).
-
-## Start dev web server
-
-    npm start
-
-## Build the app in production mode
-
-    npm run build
-
-It builds all files to dist folder. To deploy to production server, copy all the `dist/*` files to production root folder.
-
-For example
-```
-dist/index.html
-dist/foo.12345.js
-```
-Copy to production root folder
-```
-root_folder/index.html
-root_folder/foo.12345.js
-```
-
-## Unit Tests
-
-    npm run test
-
-Run unit tests in watch mode.
-
-    npm run test:watch
+This is a Chrome DevTools extension for the [Grid Engine plugin for Phaser 3](https://annoraaq.github.io/grid-engine/).
 
 
-## Analyze webpack bundle
+## How to use?
+When creating your scene, make sure to expose your gridEngine instance via `window.__GRID_ENGINE__`. (see `public/game.js` for an example).
 
-    npm run analyze
+After that open the DevTools and navigate to the new panel `Grid Engine`.
+
+## Ideas? New Features?
+Let me hear your feedback and ideas. Create an issue and let's discuss.

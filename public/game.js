@@ -71,7 +71,9 @@ function create() {
   };
 
   this.gridEngine.create(cloudCityTilemap, gridEngineConfig);
-  window.gridEngine = this.gridEngine;
+
+  // EXPOSE TO EXTENSION
+  window.__GRID_ENGINE__ = this.gridEngine;
 }
 
 function update() {

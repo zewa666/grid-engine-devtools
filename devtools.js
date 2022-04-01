@@ -1,1 +1,1 @@
-chrome.devtools.panels.create('GridEngine', null, 'panel.html', null);
+chrome.devtools.panels.create('Grid Engine', null, 'panel.html', null);
