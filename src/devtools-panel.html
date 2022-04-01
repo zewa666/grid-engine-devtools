@@ -1,0 +1,18 @@
+<h1>GridEngine DevTools</h1>
+
+<div>
+  <label>Select a character:</label>
+  <select value.bind="selectedCharacter">
+    <option repeat.for="char of characters"
+            value.bind="char">${char}</option>
+  </select>
+
+  <label>MoveTo:</label>
+  <input id="txt_moveTo"
+         value.bind="moveToInput"
+         placeholder="x,y" />
+
+  <button click.trigger="moveTo()">MoveTo now</button>
+</div>
+
+<div class="message-bar">${msg}</div>

@@ -1,0 +1,7 @@
+.message-bar {
+  position: absolute;
+  bottom: 0;
+  display: block;
+  color: green;
+  background: cornsilk;
+}
