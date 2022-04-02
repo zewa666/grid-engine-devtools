@@ -91,12 +91,14 @@ module.exports = function (env, { analyze }) {
         patterns: [
           {
             from: "./manifest.json", transform: (content) => {
-              return content.toString().replace(/"content_security_policy": "script-src 'self' 'unsafe-eval' http:\/\/localhost:9000; object-src 'self'",/, "")
+              return content.toString()
+                .replace(/"manifest_version": 2,/, `"manifest_version": 3,`)
+                .replace(/"content_security_policy": "script-src 'self' 'unsafe-eval' http:\/\/localhost:9000; object-src 'self'",/, "")
             }
           },
           { from: "devtools.js" },
           { from: "devtools.html" },
-          { from: "icon*.png"}
+          { from: "icon*.png" }
         ],
       }),
       new Dotenv({
