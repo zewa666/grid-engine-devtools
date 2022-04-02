@@ -1,4 +1,5 @@
 import { observable } from "aurelia";
+
 import { SUT } from "./constants";
 import { evaluate } from "./helper/inject";
 import { Position } from "./models";
@@ -10,6 +11,14 @@ export class DevtoolsPanel {
   public moveToInput: string;
   public moveRandomDelayInput: number;
   public moveRandomRadiusInput: number;
+
+  public get isValidPosition() {
+    if (!this.moveToInput || !this.moveToInput.match(/^[^,]*,[^,]*$/gm)) {
+      return true;
+    }
+
+    return !this.moveToInput.split(",").map(i => i.trim()).every(i => parseInt(i, 10) >= 0);
+  }
 
   async attaching() {
     this.msg = this.isGridEngineAvailable() ? "Grid Engine connected" : "No Grid Engine found";

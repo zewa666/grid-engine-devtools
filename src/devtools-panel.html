@@ -19,8 +19,8 @@
            placeholder="x,y" />
     <position-picker value.bind="moveToInput"></position-picker>
 
-    <button click.trigger="moveTo()">MoveTo</button>
-    <button click.trigger="teleport()">Teleport</button>
+    <button disabled.bind="isValidPosition" click.trigger="moveTo()">MoveTo</button>
+    <button disabled.bind="isValidPosition" click.trigger="teleport()">Teleport</button>
   </div>
 
   <div class="form-group">
