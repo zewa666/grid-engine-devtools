@@ -96,6 +96,7 @@ module.exports = function (env, { analyze }) {
           },
           { from: "devtools.js" },
           { from: "devtools.html" },
+          { from: "icon*.png"}
         ],
       }),
       new Dotenv({
