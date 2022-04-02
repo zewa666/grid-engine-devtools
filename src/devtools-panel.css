@@ -9,3 +9,12 @@
 .move-to {
   width: 40px;
 }
+
+.form-group {
+  margin-top: 10px;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+}

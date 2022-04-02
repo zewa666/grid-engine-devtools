@@ -1,6 +1,7 @@
 import { observable } from "aurelia";
-
-const SUT = "__GRID_ENGINE__";
+import { SUT } from "./constants";
+import { evaluate } from "./helper/inject";
+import { Position } from "./models";
 
 export class DevtoolsPanel {
   public msg;
@@ -30,22 +31,4 @@ export class DevtoolsPanel {
   private async getCharacterPos(char) {
     return await evaluate<Position>(`window.${SUT}.getPosition("${char}")`);
   }
-}
-
-const evaluate = <T>(script) => {
-  return new Promise<T>((resolve, reject) => {
-    chrome.devtools.inspectedWindow.eval(script, (value: T, exc) => {
-      if (exc) {
-        reject(exc);
-        return;
-      }
-
-      resolve(value);
-    })
-  });
-}
-
-export interface Position {
-  x: number;
-  y: number;
 }

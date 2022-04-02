@@ -1,20 +1,24 @@
 <h1>Grid Engine DevTools</h1>
 
 <div class="main">
-  <label>Select a character:</label>
-  <select value.bind="selectedCharacter">
-    <option repeat.for="char of characters"
-            value.bind="char">${char}</option>
-  </select>
-  <br />
-  <label>MoveTo:</label>
+  <div class="form-group">
+    <label>Select a character:</label>
+    <select value.bind="selectedCharacter">
+      <option repeat.for="char of characters"
+              value.bind="char">${char}</option>
+    </select>
+  </div>
 
-  <input id="txt_moveTo"
-         class="move-to"
-         value.bind="moveToInput"
-         placeholder="x,y" />
 
-  <button click.trigger="moveTo()">MoveTo</button>
+  <div class="form-group">
+    <input id="txt_moveTo"
+           class="move-to"
+           value.bind="moveToInput"
+           placeholder="x,y" />
+    <position-picker value.bind="moveToInput"></position-picker>
+
+    <button click.trigger="moveTo()">MoveTo</button>
+  </div>
 </div>
 
 <div class="message-bar">${msg}</div>
