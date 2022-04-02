@@ -7,17 +7,35 @@
       <option repeat.for="char of characters"
               value.bind="char">${char}</option>
     </select>
+
+    <button click.trigger="stopMovement()">Stop</button>
   </div>
 
 
   <div class="form-group">
     <input id="txt_moveTo"
-           class="move-to"
+           class="input-small"
            value.bind="moveToInput"
            placeholder="x,y" />
     <position-picker value.bind="moveToInput"></position-picker>
 
     <button click.trigger="moveTo()">MoveTo</button>
+    <button click.trigger="teleport()">Teleport</button>
+  </div>
+
+  <div class="form-group">
+    <label>Delay (0)</label>
+    <input type="number"
+           class="input-small"
+           value.bind="moveRandomDelayInput"
+           placeholder="0">
+    <label>Radius (-1)</label>
+    <input type="number"
+           class="input-small"
+           value.bind="moveRandomRadiusInput"
+           placeholder="-1">
+
+    <button click.trigger="moveRandom()">MoveRandomly</button>
   </div>
 </div>
 
