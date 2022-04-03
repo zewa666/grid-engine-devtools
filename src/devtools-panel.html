@@ -1,6 +1,6 @@
 <h1>Grid Engine DevTools</h1>
 
-<div class="main">
+<div class="main ${gridEngineAvailable === false && 'error'}">
   <div class="form-group">
     <label>Select a character:</label>
     <select value.bind="selectedCharacter">
@@ -17,10 +17,13 @@
            class="input-small"
            value.bind="moveToInput"
            placeholder="x,y" />
-    <position-picker value.bind="moveToInput"></position-picker>
+    <position-picker disabled.bind="gridEngineAvailable === false"
+                     value.bind="moveToInput"></position-picker>
 
-    <button disabled.bind="isValidPosition" click.trigger="moveTo()">MoveTo</button>
-    <button disabled.bind="isValidPosition" click.trigger="teleport()">Teleport</button>
+    <button disabled.bind="isValidPosition"
+            click.trigger="moveTo()">MoveTo</button>
+    <button disabled.bind="isValidPosition"
+            click.trigger="teleport()">Teleport</button>
   </div>
 
   <div class="form-group">
@@ -67,4 +70,6 @@
   </div>
 </div>
 
-<div class="message-bar">${msg}</div>
+<div class="message-bar ${!gridEngineAvailable && 'error'}">
+  ${gridEngineAvailable ? "Grid Engine connected" : "No Grid Engine found"}
+</div>

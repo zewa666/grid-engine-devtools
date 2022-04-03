@@ -6,6 +6,10 @@
   background: cornsilk;
 }
 
+.message-bar.error {
+  color: darkred;
+}
+
 .input-small {
   width: 40px;
 }
@@ -38,4 +42,8 @@
 .main {
   display: flex;
   flex-direction: column;
+}
+.main.error {
+  opacity: 0.4;
+  pointer-events: none;
 }

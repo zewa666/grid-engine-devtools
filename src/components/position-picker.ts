@@ -8,10 +8,11 @@ const POLL_TIMEOUT = 10000;
 
 @customElement({
   name: 'position-picker',
-  template: `<button ref="btn" click.trigger="pickPosition()" style="margin-left: -5px; cursor: crosshair;">Ꚛ</button>`
+  template: `<button ref="btn" disabled.bind="disabled" click.trigger="pickPosition()" style="margin-left: -5px; cursor: crosshair;">Ꚛ</button>`
 })
 export class PositionPicker {
   @bindable({ mode: BindingMode.twoWay }) value: string;
+  @bindable() disabled: boolean;
   btn: HTMLButtonElement;
   id: string = uuidv4().replaceAll("-", "");
 

@@ -18,6 +18,7 @@ export class DevtoolsPanel {
   public selectedFollowTarget: string;
   public followClosestPointIfBlockedInput = false;
   public followDistanceInput: number;
+  public gridEngineAvailable = false;
 
   public get followTargets() {
     return this.characters.filter(c => c !== this.selectedCharacter);
@@ -32,44 +33,53 @@ export class DevtoolsPanel {
   }
 
   async attaching() {
-    this.msg = this.isGridEngineAvailable() ? "Grid Engine connected" : "No Grid Engine found";
-    this.characters = await evaluate<string[]>(`window.${SUT}.getAllCharacters()`);
+    this.gridEngineAvailable = await this.isGridEngineAvailable();
+
+    if (this.gridEngineAvailable) {
+      this.characters = await evaluate<string[]>(`window.${SUT}.getAllCharacters()`);
+    }
   }
 
   public async follow() {
-    console.log(this.followClosestPointIfBlockedInput);
+    if (!this.gridEngineAvailable) return;
     await evaluate(`window.${SUT}.follow("${this.selectedCharacter}", "${this.selectedFollowTarget}", ${this.followDistanceInput || 0}, ${this.followClosestPointIfBlockedInput === true ? 'true' : 'false'})`);
   }
 
   public async stopMovement() {
+    if (!this.gridEngineAvailable) return;
     await evaluate(`window.${SUT}.stopMovement("${this.selectedCharacter}")`);
   }
 
   public async turnTowards() {
+    if (!this.gridEngineAvailable) return;
     await evaluate(`window.${SUT}.turnTowards("${this.selectedCharacter}", "${this.selectedDirection}")`);
   }
 
   public async teleport() {
+    if (!this.gridEngineAvailable) return;
     const [x, y] = this.moveToInput.split(",");
     await evaluate(`window.${SUT}.setPosition("${this.selectedCharacter}", { x: ${x}, y: ${y}})`);
   }
 
   public async moveTo() {
+    if (!this.gridEngineAvailable) return;
     const [x, y] = this.moveToInput.split(",");
     await evaluate(`window.${SUT}.moveTo("${this.selectedCharacter}", { x: ${x}, y: ${y}})`);
   }
 
   public async moveRandom() {
+    if (!this.gridEngineAvailable) return;
     await evaluate(`window.${SUT}.moveRandomly("${this.selectedCharacter}", ${this.moveRandomDelayInput || 0}, ${this.moveRandomRadiusInput || -1})`);
   }
 
   private async selectedCharacterChanged() {
+    if (!this.gridEngineAvailable) return;
     const { x, y } = await this.getCharacterPos(this.selectedCharacter);
     this.moveToInput = `${x},${y}`;
   }
 
   private async isGridEngineAvailable() {
-    return await evaluate(`!!window.${SUT}`);
+    return await evaluate<boolean>(`!!window.${SUT}`);
   }
 
   private async getCharacterPos(char) {
