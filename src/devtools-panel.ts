@@ -1,4 +1,5 @@
 import { observable } from "aurelia";
+
 import { SUT } from "./constants";
 import { evaluate } from "./helper/inject";
 import { Position } from "./models";
@@ -20,6 +21,14 @@ export class DevtoolsPanel {
 
   public get followTargets() {
     return this.characters.filter(c => c !== this.selectedCharacter);
+  }
+
+  public get isValidPosition() {
+    if (!this.moveToInput || !this.moveToInput.match(/^[^,]*,[^,]*$/gm)) {
+      return true;
+    }
+
+    return !this.moveToInput.split(",").map(i => i.trim()).every(i => parseInt(i, 10) >= 0);
   }
 
   async attaching() {
