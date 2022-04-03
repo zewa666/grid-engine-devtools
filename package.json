@@ -1,12 +1,17 @@
 {
   "name": "grid-engine-devtools",
-  "description": "An Aurelia 2 client application.",
+  "description": "Chrome DevTools Extension for the Phaser3 Grid Engine Plugin",
   "version": "0.0.1",
+  "author": {
+    "email": "zewa666@gmail.com",
+    "name": "Vildan Softic",
+    "url": "https://github.com/zewa666"
+  },
   "repository": {
     "type": "git",
-    "url": "???"
+    "url": "https://github.com/zewa666/grid-engine-devtools"
   },
-  "license": "UNLICENSED",
+  "license": "MIT",
   "dependencies": {
     "aurelia": "latest",
     "uuid": "^8.3.2"

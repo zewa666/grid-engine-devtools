@@ -2,6 +2,8 @@
 
 This is a Chrome DevTools extension for the [Grid Engine plugin for Phaser 3](https://annoraaq.github.io/grid-engine/).
 
+![Intro image](./intro.png)
+
 
 ## How to use?
 When creating your scene, make sure to expose your gridEngine instance via `window.__GRID_ENGINE__`. (see `public/game.js` for an example).
