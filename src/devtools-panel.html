@@ -37,6 +37,34 @@
 
     <button click.trigger="moveRandom()">MoveRandomly</button>
   </div>
+
+  <div class="form-group">
+    <select value.bind="selectedDirection">
+      <option repeat.for="direction of directions"
+              value.bind="direction">${direction}</option>
+    </select>
+
+    <button click.trigger="turnTowards()">TurnTowards</button>
+  </div>
+
+  <div class="form-group">
+    <select value.bind="selectedFollowTarget">
+      <option repeat.for="target of followTargets"
+              value.bind="target">${target}</option>
+    </select>
+    <label>Distance (0)</label>
+    <input type="number"
+           class="input-small"
+           value.bind="followDistanceInput"
+           placeholder="0">
+    <label>ClosestBlocked (false)</label>
+    <input type="checkbox"
+           class="input-small"
+           checked.bind="followClosestPointIfBlockedInput"
+           placeholder="0">
+
+    <button click.trigger="follow()">Follow</button>
+  </div>
 </div>
 
 <div class="message-bar">${msg}</div>

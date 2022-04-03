@@ -12,6 +12,27 @@
 
 .form-group {
   margin-top: 10px;
+  border: 1px dashed gainsboro;
+  padding: 5px;
+}
+
+.form-group button {
+  cursor: pointer;
+}
+
+.form-group :is(input, select, button) {
+  height: 17px;
+  -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+  padding: 0.5em;
+  margin: 0.1em 0.2em;
+  border: 1px solid black;
+  border-radius: 3px;
+}
+
+.form-group input[type="checkbox"] {
+  position: relative;
+  top: 4px;
 }
 
 .main {

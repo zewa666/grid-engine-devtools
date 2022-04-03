@@ -65,7 +65,7 @@ function create() {
         id: "npc1",
         sprite: npcSprite,
         walkingAnimationMapping: 1,
-        startPosition: { x: 10, y: 12 },
+        startPosition: { x: 11, y: 12 },
       },
     ],
   };
