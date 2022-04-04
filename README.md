@@ -2,6 +2,8 @@
 
 This is a Chrome DevTools extension for the [Grid Engine plugin for Phaser 3](https://annoraaq.github.io/grid-engine/).
 
+Install the extension in the [Google Chrome Web Store](https://chrome.google.com/webstore/detail/grid-engine-devtools/moplhbafnakhjjehlmpedbmbomcmgope)
+
 ![Intro image](./intro.png)
 
 
