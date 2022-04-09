@@ -62,7 +62,7 @@ function create() {
         startPosition: { x: 8, y: 8 },
       },
       {
-        id: "npc1",
+        id: "npc" + Math.random().toFixed(3).substring(2),
         sprite: npcSprite,
         walkingAnimationMapping: 1,
         startPosition: { x: 11, y: 12 },
@@ -71,6 +71,18 @@ function create() {
   };
 
   this.gridEngine.create(cloudCityTilemap, gridEngineConfig);
+
+  setTimeout(() => {
+    const newNpcSprite = this.add.sprite(0, 0, "player");
+    newNpcSprite.scale = 1.5;
+
+    this.gridEngine.addCharacter({
+      id: "npc" + Math.random().toFixed(3).substring(2),
+      sprite: newNpcSprite,
+      walkingAnimationMapping: 1,
+      startPosition: { x: 13, y: 12 },
+    })
+  }, 5000);
 
   // EXPOSE TO EXTENSION
   window.__GRID_ENGINE__ = this.gridEngine;
