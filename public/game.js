@@ -90,13 +90,13 @@ function create() {
 
 function update() {
   const cursors = this.input.keyboard.createCursorKeys();
-  if (cursors.left.isDown) {
+  if (cursors.left.isDown || this.input.keyboard.addKey('A').isDown) {
     this.gridEngine.move("player", "left");
-  } else if (cursors.right.isDown) {
+  } else if (cursors.right.isDown || this.input.keyboard.addKey('D').isDown) {
     this.gridEngine.move("player", "right");
-  } else if (cursors.up.isDown) {
+  } else if (cursors.up.isDown || this.input.keyboard.addKey('W').isDown) {
     this.gridEngine.move("player", "up");
-  } else if (cursors.down.isDown) {
+  } else if (cursors.down.isDown || this.input.keyboard.addKey('S').isDown) {
     this.gridEngine.move("player", "down");
   }
 }
