@@ -1,6 +1,7 @@
 import { observable } from "aurelia";
 
 import { SUT } from "./constants";
+import { EvalService } from "./eval-service";
 import { evaluate } from "./helper/inject";
 import { Position } from "./models";
 
@@ -20,6 +21,8 @@ export class DevtoolsPanel {
   public followDistanceInput: number;
   public gridEngineAvailable = false;
 
+  private charChangedInterval: number;
+
   public get followTargets() {
     return this.characters.filter(c => c !== this.selectedCharacter);
   }
@@ -32,12 +35,31 @@ export class DevtoolsPanel {
     return !this.moveToInput.split(",").map(i => i.trim()).every(i => parseInt(i, 10) >= 0);
   }
 
-  async attaching() {
-    this.gridEngineAvailable = await this.isGridEngineAvailable();
+  constructor(private evalService: EvalService) {}
+
+  public async attaching() {
+    this.gridEngineAvailable = await this.evalService.isGridEngineAvailable();
 
     if (this.gridEngineAvailable) {
-      this.characters = await evaluate<string[]>(`window.${SUT}.getAllCharacters()`);
+      this.characters = await this.evalService.getAllCharacters();
+      this.setupCharacterChangedListener();
     }
+  }
+
+  public setupCharacterChangedListener() {
+    clearInterval(this.charChangedInterval);
+
+    this.charChangedInterval = window.setInterval(async () => {
+      if (await this.evalService.haveCharactersChanged() || !(await this.evalService.charChangeDetectionSubAvailable())) {
+        this.characters = await this.evalService.getAllCharacters();
+        this.evalService.unsetChangedDetection();
+      }
+    }, 2000);
+  }
+
+  public async detaching() {
+    clearInterval(this.charChangedInterval);
+    this.charChangedInterval = undefined;
   }
 
   public async follow() {
@@ -76,10 +98,6 @@ export class DevtoolsPanel {
     if (!this.gridEngineAvailable) return;
     const { x, y } = await this.getCharacterPos(this.selectedCharacter);
     this.moveToInput = `${x},${y}`;
-  }
-
-  private async isGridEngineAvailable() {
-    return await evaluate<boolean>(`!!window.${SUT}`);
   }
 
   private async getCharacterPos(char) {
