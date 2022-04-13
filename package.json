@@ -1,7 +1,7 @@
 {
   "name": "grid-engine-devtools",
   "description": "Chrome DevTools Extension for the Phaser3 Grid Engine Plugin",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": {
     "email": "zewa666@gmail.com",
     "name": "Vildan Softic",
